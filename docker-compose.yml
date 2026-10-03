@@ -1,0 +1,118 @@
+version: '3.8'
+
+services:
+  # -------------------------------------------------------------
+  # 1. Message Broker: RabbitMQ (sensor_data_queue)
+  # -------------------------------------------------------------
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: pred_rabbitmq
+    ports:
+      - "5672:5672"     # AMQP protokolü
+      - "15672:15672"   # RabbitMQ Yönetim Paneli
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - industrial_net
+
+  # -------------------------------------------------------------
+  # 2. Time-Series / Relational Database: PostgreSQL
+  # -------------------------------------------------------------
+  postgres:
+    image: postgres:16-alpine
+    container_name: pred_postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: predictive_maintenance
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: adminpassword
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d predictive_maintenance"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - industrial_net
+
+  # -------------------------------------------------------------
+  # 3. AI Inference Service: Python FastAPI & Scikit-Learn
+  # -------------------------------------------------------------
+  ai-service:
+    build:
+      context: ./TahminleyiciBakim/AI_Service
+      dockerfile: Dockerfile
+    container_name: pred_ai_service
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - INTERNAL_API_KEY=industrial-internal-ai-key-2026
+    networks:
+      - industrial_net
+
+  # -------------------------------------------------------------
+  # 4. Core Backend: C# ASP.NET Core 8 Web API & SignalR
+  # -------------------------------------------------------------
+  backend-api:
+    build:
+      context: ./TahminleyiciBakim/Backend_API
+      dockerfile: Dockerfile
+    container_name: pred_backend_api
+    ports:
+      - "5000:5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - PORT=5000
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
+      - DATABASE_URL=Host=postgres;Port=5432;Database=predictive_maintenance;Username=admin;Password=adminpassword
+      - AI_SERVICE_URL=http://ai-service:8000
+      - INTERNAL_API_KEY=industrial-internal-ai-key-2026
+      - IOT_API_KEY=industrial-secret-edge-key-2026
+      - JWT_SECRET=ZeroTrust_IndustrialPredictiveMaintenance_SecureKey_2026_xYz987!
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+      ai-service:
+        condition: service_started
+    networks:
+      - industrial_net
+
+  # -------------------------------------------------------------
+  # 5. Industrial Visualization: Grafana Dashboard
+  # -------------------------------------------------------------
+  grafana:
+    image: grafana/grafana:latest
+    container_name: pred_grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Viewer
+    volumes:
+      - ./TahminleyiciBakim/Grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+      - ./TahminleyiciBakim/Grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+    depends_on:
+      - postgres
+    networks:
+      - industrial_net
+
+networks:
+  industrial_net:
+    driver: bridge
+
+volumes:
+  pgdata:

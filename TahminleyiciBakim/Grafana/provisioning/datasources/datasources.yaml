@@ -1,0 +1,17 @@
+apiVersion: 1
+
+datasources:
+  - name: PredictivePostgres
+    type: postgres
+    access: proxy
+    url: postgres:5432
+    user: admin
+    secureJsonData:
+      password: adminpassword
+    jsonData:
+      database: predictive_maintenance
+      sslmode: disable
+      maxOpenConns: 10
+      maxIdleConns: 5
+    isDefault: true
+    editable: true

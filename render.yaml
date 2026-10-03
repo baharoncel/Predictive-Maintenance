@@ -1,0 +1,59 @@
+services:
+  # -------------------------------------------------------------
+  # 1. AI Service: Python FastAPI (Predictive Machine Learning)
+  # -------------------------------------------------------------
+  - type: web
+    name: ai-service
+    runtime: python
+    rootDir: TahminleyiciBakim/AI_Service
+    plan: free
+    buildCommand: pip install -r requirements.txt && python train.py
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.8
+      - key: INTERNAL_API_KEY
+        generateValue: true
+
+  # -------------------------------------------------------------
+  # 2. Backend API: C# ASP.NET Core 8 Web API & Message Broker
+  # -------------------------------------------------------------
+  - type: web
+    name: backend-api
+    runtime: docker
+    rootDir: TahminleyiciBakim/Backend_API
+    dockerfilePath: Dockerfile
+    plan: free
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      # RabbitMQ Connection String (Render external broker or CloudAMQP)
+      - key: RABBITMQ_URL
+        sync: false
+      # PostgreSQL Database Connection String
+      - key: DATABASE_URL
+        fromDatabase:
+          name: predictive-db
+          property: connectionString
+      # AI Microservice URL (Service-to-Service communication)
+      - key: AI_SERVICE_URL
+        fromService:
+          type: web
+          name: ai-service
+          property: host
+      # Internal security key shared between C# and Python
+      - key: INTERNAL_API_KEY
+        fromService:
+          type: web
+          name: ai-service
+          envVarKey: INTERNAL_API_KEY
+      # IoT Device Authentication Key
+      - key: IOT_API_KEY
+        generateValue: true
+
+databases:
+  # Managed PostgreSQL Database on Render
+  - name: predictive-db
+    plan: free
+    databaseName: predictive_maintenance
+    user: admin
