@@ -9,8 +9,16 @@
 ![Security](https://img.shields.io/badge/Security-Zero--Trust%20%26%20ISO%2027001-brightgreen)
 ![Standard](https://img.shields.io/badge/Standard-IEC%2061508%20SIL--3-critical)
 
+### 📸 Canlı Sistem Arayüzü & Acil Durum Otomasyonu
+
 <p align="center">
-  <img src="docs/screenshots/cockpit_dashboard.png" alt="Industrial Predictive Maintenance Cockpit" width="100%" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+  <strong>1. Normal Seyir: Yönetici ROI Sayacı, Anlık Telemetri & Canlı Dalga Formu</strong><br/>
+  <img src="docs/screenshots/cockpit_dashboard.png" alt="Normal Operasyonel Kokpit" width="100%" style="border-radius: 10px; margin-bottom: 16px;">
+</p>
+
+<p align="center">
+  <strong>2. Katastrofik Durum: IEC 61508 SIL-3 Otomatik E-STOP & Termal Kaçak Alarmı</strong><br/>
+  <img src="docs/screenshots/catastrophic_estop.png" alt="SIL-3 E-STOP Acil Durdurma Alarmı" width="100%" style="border-radius: 10px;">
 </p>
 
 Siemens, General Electric, Schneider Electric ve AWS IoT SiteWise endüstriyel standartlarında geliştirilmiş; **C# ASP.NET Core 8**, **Python (FastAPI & Scikit-Learn)**, **RabbitMQ**, **PostgreSQL** ve **Grafana** mimarisine sahip kurumsal kestirimci bakım (Predictive Maintenance) ve katastrofik kaza önleme platformu.
