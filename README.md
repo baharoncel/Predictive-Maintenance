@@ -9,6 +9,10 @@
 ![Security](https://img.shields.io/badge/Security-Zero--Trust%20%26%20ISO%2027001-brightgreen)
 ![Standard](https://img.shields.io/badge/Standard-IEC%2061508%20SIL--3-critical)
 
+<p align="center">
+  <img src="docs/images/hero_banner.jpg" alt="Industrial Predictive Maintenance Cockpit" width="100%" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+</p>
+
 Siemens, General Electric, Schneider Electric ve AWS IoT SiteWise endüstriyel standartlarında geliştirilmiş; **C# ASP.NET Core 8**, **Python (FastAPI & Scikit-Learn)**, **RabbitMQ**, **PostgreSQL** ve **Grafana** mimarisine sahip kurumsal kestirimci bakım (Predictive Maintenance) ve katastrofik kaza önleme platformu.
 
 ---
