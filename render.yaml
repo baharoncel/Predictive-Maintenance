@@ -19,7 +19,7 @@ services:
   # 2. Backend API: C# ASP.NET Core 8 Web API & Message Broker
   # -------------------------------------------------------------
   - type: web
-    name: backend-api
+    name: predictive-maintenance-cockpit
     runtime: docker
     rootDir: TahminleyiciBakim/Backend_API
     dockerfilePath: Dockerfile
