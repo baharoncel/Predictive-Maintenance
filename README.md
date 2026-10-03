@@ -8,6 +8,7 @@
 ![Render Cloud](https://img.shields.io/badge/Cloud-Render%20Blueprint-46E3B7?logo=render)
 ![Security](https://img.shields.io/badge/Security-Zero--Trust%20%26%20ISO%2027001-brightgreen)
 ![Standard](https://img.shields.io/badge/Standard-IEC%2061508%20SIL--3-critical)
+[![Live Demo](https://img.shields.io/badge/🚀%20Canlı%20Demo-predictive--maintenance--cockpit.onrender.com-00e676?style=for-the-badge&logo=render&logoColor=white)](https://predictive-maintenance-cockpit.onrender.com)
 
 ### 📸 Canlı Endüstriyel Kokpit & Saha Arayüzü
 
@@ -92,6 +93,18 @@ flowchart TD
     SignalR --> NotifyEngine
     Blackbox -->|"Zaman Serisi & Denetim"| GrafanaDash
 ```
+
+---
+
+## 🌐 Canlı Bulut Dağıtımı & Çevrimiçi Erişim (Live Production)
+
+Platform, Render Cloud üzerinde aktif olarak çalışmaktadır. Herhangi bir yerel kuruluma gerek kalmadan doğrudan tarayıcınızdan test edebilirsiniz:
+
+* **🚀 Canlı Endüstriyel Kokpit:** [https://predictive-maintenance-cockpit.onrender.com](https://predictive-maintenance-cockpit.onrender.com)
+* **📘 Canlı Swagger API Dokümantasyonu:** [https://predictive-maintenance-cockpit.onrender.com/swagger](https://predictive-maintenance-cockpit.onrender.com/swagger)
+* **📄 Canlı ISO 55000 Denetim Raporu (PDF):** [https://predictive-maintenance-cockpit.onrender.com/api/reports/pdf-view](https://predictive-maintenance-cockpit.onrender.com/api/reports/pdf-view)
+* **🔐 Canlı ISO 27001 Kara Kutu Adli Mührü:** [https://predictive-maintenance-cockpit.onrender.com/api/blackbox/export-audit](https://predictive-maintenance-cockpit.onrender.com/api/blackbox/export-audit)
+* **❤️ Canlı Sistem Sağlık Kontrolü:** [https://predictive-maintenance-cockpit.onrender.com/health](https://predictive-maintenance-cockpit.onrender.com/health)
 
 ---
 
