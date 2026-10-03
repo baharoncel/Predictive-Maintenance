@@ -9,16 +9,16 @@
 ![Security](https://img.shields.io/badge/Security-Zero--Trust%20%26%20ISO%2027001-brightgreen)
 ![Standard](https://img.shields.io/badge/Standard-IEC%2061508%20SIL--3-critical)
 
-### 📸 Canlı Sistem Arayüzü & Acil Durum Otomasyonu
+### 📸 Canlı Endüstriyel Kokpit & Saha Arayüzü
 
 <p align="center">
-  <strong>1. Normal Seyir: Yönetici ROI Sayacı, Anlık Telemetri & Canlı Dalga Formu</strong><br/>
-  <img src="docs/screenshots/cockpit_dashboard.png" alt="Normal Operasyonel Kokpit" width="100%" style="border-radius: 10px; margin-bottom: 16px;">
+  <strong>Bölüm 1: Yönetici ROI Sayacı, IEC 61508 SIL-3 Acil E-STOP ve Sensör KPI Göstergeleri</strong><br/>
+  <img src="docs/screenshots/dashboard_part1_top.png" alt="Yönetici ROI ve SIL-3 Alarm Kokpiti" width="100%" style="border-radius: 10px; margin-bottom: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.6);">
 </p>
 
 <p align="center">
-  <strong>2. Katastrofik Durum: IEC 61508 SIL-3 Otomatik E-STOP & Termal Kaçak Alarmı</strong><br/>
-  <img src="docs/screenshots/catastrophic_estop.png" alt="SIL-3 E-STOP Acil Durdurma Alarmı" width="100%" style="border-radius: 10px;">
+  <strong>Bölüm 2: Gerçek Zamanlı Telemetri Grafiği, Simülatör, OSINT Kaza Radarı ve ISO 27001 Kara Kutu</strong><br/>
+  <img src="docs/screenshots/dashboard_part2_bottom.png" alt="Canlı Grafik, OSINT Radarı ve Kriptografik Kara Kutu" width="100%" style="border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.6);">
 </p>
 
 Siemens, General Electric, Schneider Electric ve AWS IoT SiteWise endüstriyel standartlarında geliştirilmiş; **C# ASP.NET Core 8**, **Python (FastAPI & Scikit-Learn)**, **RabbitMQ**, **PostgreSQL** ve **Grafana** mimarisine sahip kurumsal kestirimci bakım (Predictive Maintenance) ve katastrofik kaza önleme platformu.
